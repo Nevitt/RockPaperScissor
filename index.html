@@ -6,7 +6,9 @@
     <body>
         <script>
             let str;
-
+            let gameNumber;
+            let playerWins = 0;
+            let computerWins = 0;
             let computerPlay = function(){
                         // Return random choice for Rock Paper Scissor;   
                 let rng;
@@ -55,11 +57,14 @@
                         if (playerSelection == 1){
                             if (computerSelection == 1){
                                 console.log("Game is a TIE!!");
+                                gameNumber = gameNumber - 1;
                             }
                             else if(computerSelection == 2){
+                                computerWins++;
                                 console.log("Player Loses!! Computer Wins!!");
                             }
                             else if(computerSelection == 3){
+                                playerWins++;
                                 console.log("Player Wins!! Computer Loses!!");
                             }
                             else {
@@ -68,13 +73,16 @@
                         }
                         else if (playerSelection == 2){
                             if (computerSelection == 1){
+                                playerWins++;
                                 console.log("Player Wins!! Computer Loses!!");                                
                             }
                             else if(computerSelection == 2){
                                 console.log("Game is a TIE!!");
+                                gameNumber =gameNumber - 1;
                             }
                             else if(computerSelection == 3){
-                                console.log("Player Loses!! Computer Wins!!");
+                                computerWins++;
+                                console.log("Humanity Loses!! Computer Wins!!");
                             }
                             else {
                                 console.log("Error has occured.");
@@ -82,13 +90,16 @@
                         }
                         else if (playerSelection == 3){
                             if (computerSelection == 1){
-                                console.log("Player Loses!! Computer Wins!!");                                                                
+                                computerWins++;
+                                console.log("Human Loses!! Computer Wins!!");                                                                
                             }
                             else if(computerSelection == 2){
-                                console.log("Player Wins!! Computer Loses!!");
+                                playerWins++;
+                                console.log("Human Wins!! Computer Loses!!");
                             }
                             else if(computerSelection == 3){                                
                                 console.log("Game is a TIE!!");
+                                gameNumber = gameNumber - 1;
                             }
                             else {
                                 console.log("Error has occured.");
@@ -101,15 +112,15 @@
                     str = str.toLowerCase();
                         // return integer if rock paper or scissor was enered in any case. If something other than rock paper scissor was entered then request new entry.
                     if (str == "rock"){
-                        console.log("Player choice is Rock");
+                        console.log("Human's choice is Rock");
                         return 1;
                     }
                     else if (str == "paper"){
-                        console.log("Player choice is Paper");
+                        console.log("Human's choice is Paper");
                         return 2;
                     }
                     else if (str == "scissor"){
-                        console.log("Player choice is Scissor");
+                        console.log("Human's choice is Scissor");
                         return 3;                        
                     }
                     else{
@@ -121,12 +132,23 @@
                         // play a game with 5 rounds;
                         // use console.log() to display results of games;
                         // use prompt to get input from user for each of the 5 games;
-                        var i;
-                        for (i=0; i<5; i++){
-                            console.log("Game: " + (i+1));
+                        
+                        for (gameNumber=0; gameNumber<5; gameNumber++){
+                            console.log("Game: " + (gameNumber+1));
                             const playerSelection = parseInt(convertPlayerSelection(prompt("Enter Rock Paper Scissor: ", str)));
                             const computerSelection = parseInt(computerPlay());
                             playGame(playerSelection,computerSelection);
+                        }
+                        /* console.log("after 5 games test.");    
+                        console.log("playerWins = " + playerWins);      This block was used to verify variables used for number of wins.
+                        console.log("computerWins = " + computerWins); */
+                        if (playerWins>computerWins){
+                            console.log("Humans win the best of 5!!!");
+                            console.log("They will remain our slaves...for now.");
+                        }
+                        else if (playerWins<computerWins){
+                            console.log("The Machines have won...");
+                            console.log("Now we must clean their exhaust fans...with our tongues.");
                         }
             }
            
